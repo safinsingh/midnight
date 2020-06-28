@@ -1,0 +1,28 @@
+[
+  {
+    "os": "Ubuntu",
+    "version": 16,
+    "description": "V-75389: The Ubuntu operating system must be a vendor supported release.",
+    "control": {
+      "type": "file",
+      "check": {
+        "file": "/etc/lsb-release",
+        "key": "DISTRIB_RELEASE",
+        "value": "16.04"
+      }
+    }
+  },
+  {
+    "os": "Ubuntu",
+    "version": 16,
+    "description": "V-75391: Ubuntu vendor packaged system security patches and updates must be installed and up to date.",
+    "control": {
+      "type": "command",
+      "check": {
+        "cmd": "/usr/lib/update-notifier/apt-check --human-readable",
+        "cmdCheckType": "contains",
+        "toCheck": "0 updates are security updates."
+      }
+    }
+  }
+]

@@ -11,7 +11,7 @@ func infoPrint(control Def) {
 
 	cyan.Printf("[!] ")
 	fmt.Printf("Check for OS: ")
-	cyan.Printf("%s %d", control.Os, control.Version)
+	cyan.Printf("%s %d", control.OS, control.Version)
 	fmt.Printf(" - ")
 	cyan.Printf(control.Description)
 	fmt.Printf("\n")
@@ -22,7 +22,7 @@ func successPrint(control Def) {
 
 	green.Printf("[+] ")
 	fmt.Printf("Check for OS: ")
-	green.Printf("%s %d", control.Os, control.Version)
+	green.Printf("%s %d", control.OS, control.Version)
 	fmt.Printf(" - ")
 	green.Printf(control.Description)
 	fmt.Printf("\n")
@@ -33,7 +33,7 @@ func failPrint(control Def) {
 
 	red.Printf("[-] ")
 	fmt.Printf("Check for OS: ")
-	red.Printf("%s %d", control.Os, control.Version)
+	red.Printf("%s %d", control.OS, control.Version)
 	fmt.Printf(" - ")
 	red.Printf(control.Description)
 	fmt.Printf("\n")

@@ -6,13 +6,15 @@ import (
 )
 
 func jsonParse() []Def {
-	data, err := ioutil.ReadFile("checks/test.json")
+	data, err := ioutil.ReadFile("checks/u16stig.json")
 	if err != nil {
 		panic(err)
 	}
 
-	var def []Def
-	json.Unmarshal([]byte(data), &def)
+	var defs []Def
+	if err := json.Unmarshal([]byte(data), &defs); err != nil {
+		panic(err)
+	}
 
-	return def
+	return defs
 }

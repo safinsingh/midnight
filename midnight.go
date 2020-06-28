@@ -14,7 +14,7 @@ func banner() {
 }
 
 func main() {
-	banner()
+	// banner()
 	config := jsonParse()
 	commence(config)
 }

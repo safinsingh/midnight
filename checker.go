@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+////// FILE CONTROL FUNCTIONS //////
+
 func keyInFile(key string, file string) bool {
 	f, err := ioutil.ReadFile(file)
 	if err != nil {
@@ -37,22 +39,32 @@ func keyPairInFile(key string, val string, file string) bool {
 	return false
 }
 
-func fileCheck(control Def) bool {
-	if !keyInFile(control.Control.Key, control.Control.Location) {
+func fileControl(control FileCheck) bool {
+	if !keyInFile(control.Key, control.File) {
 		return false
 	}
 
-	if keyPairInFile(control.Control.Key, control.Control.Value, control.Control.Location) {
+	if keyPairInFile(control.Key, control.Value, control.File) {
 		return true
 	}
 
 	return false
 }
 
+////// COMMAND CHECKS //////
+
+func cmdControl(control CommandCheck) bool {
+	return true
+}
+
+////// MAIN SWITCHER //////
+
 func checkSwitch(control Def) bool {
 	switch control.Control.Type {
 	case "file":
-		return fileCheck(control)
+		return fileControl(*control.Control.FileCheck())
+	case "command":
+		return cmdControl(*control.Control.CommandCheck())
 	}
 
 	return false
@@ -60,7 +72,6 @@ func checkSwitch(control Def) bool {
 
 func commence(controls []Def) {
 	for i := 0; i < len(controls); i++ {
-
 		code := checkSwitch(controls[i])
 
 		if code {
