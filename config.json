@@ -1,6 +1,6 @@
 [
   {
-    "os": "linux",
+    "os": "Ubuntu",
     "version": 16,
     "description": "Password encryption algorithm set to SHA512",
     "control": {
@@ -10,12 +10,12 @@
     }
   },
   {
-    "os": "linux",
+    "os": "Ubuntu",
     "version": 16,
     "description": "Maximum Password Age set to 90 Days",
     "control": {
       "location": "/etc/login.defs",
-      "key": "PASS_MAX_AGE",
+      "key": "PASS_MAX_DAYS",
       "value": "90"
     }
   }

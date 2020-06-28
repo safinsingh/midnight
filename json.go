@@ -2,14 +2,13 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 )
 
 func jsonParse() []Def {
 	data, err := ioutil.ReadFile("config.json")
 	if err != nil {
-		fmt.Println("Error reading config.json")
+		panic(err)
 	}
 
 	var def []Def
