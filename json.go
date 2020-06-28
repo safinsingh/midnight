@@ -6,7 +6,7 @@ import (
 )
 
 func jsonParse() []Def {
-	data, err := ioutil.ReadFile("config.json")
+	data, err := ioutil.ReadFile("checks/test.json")
 	if err != nil {
 		panic(err)
 	}

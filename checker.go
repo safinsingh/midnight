@@ -37,7 +37,7 @@ func keyPairInFile(key string, val string, file string) bool {
 	return false
 }
 
-func check(control Def) bool {
+func fileCheck(control Def) bool {
 	if !keyInFile(control.Control.Key, control.Control.Location) {
 		return false
 	}
@@ -49,9 +49,20 @@ func check(control Def) bool {
 	return false
 }
 
+func checkSwitch(control Def) bool {
+	switch control.Control.Type {
+	case "file":
+		return fileCheck(control)
+	}
+
+	return false
+}
+
 func commence(controls []Def) {
 	for i := 0; i < len(controls); i++ {
-		code := check(controls[i])
+
+		code := checkSwitch(controls[i])
+
 		if code {
 			successPrint(controls[i])
 		} else {

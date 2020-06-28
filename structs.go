@@ -2,6 +2,7 @@ package main
 
 // Control typedef for control
 type Control struct {
+	Type     string
 	Location string
 	Key      string
 	Value    string
