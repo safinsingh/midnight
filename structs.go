@@ -17,6 +17,7 @@ type ControlType string
 const (
 	FileControl    ControlType = "file"
 	CommandControl ControlType = "command"
+	PackageControl ControlType = "package"
 )
 
 // Control is the verarching struct for all control types
@@ -45,6 +46,16 @@ func (c Control) CommandCheck() *CommandCheck {
 	return &cc
 }
 
+// PackageCheck returns nil if the type is not PackageControl
+func (c Control) PackageCheck() *PackageCheck {
+	if c.Type != PackageControl {
+		return nil
+	}
+	var pc PackageCheck
+	json.Unmarshal(c.Check, &pc)
+	return &pc
+}
+
 // FileCheck contains the keys for a FileControl
 type FileCheck struct {
 	File  string `json:"file"`
@@ -57,4 +68,10 @@ type CommandCheck struct {
 	Command          string `json:"cmd"`
 	CommandCheckType string `json:"cmd_check_type"`
 	ToCheck          string `json:"to_check"`
+}
+
+// PackageCheck contains the keys for a PackageControl
+type PackageCheck struct {
+	Package   string `json:"package"`
+	Installed bool   `json:"installed"`
 }
