@@ -19,13 +19,13 @@ const (
 	CommandControl ControlType = "command"
 )
 
-//
+// Control is the verarching struct for all control types
 type Control struct {
 	Type  ControlType     `json:"type"`
 	Check json.RawMessage `json:"check"`
 }
 
-// FileCheck returns nil if the type is not FileControl.
+// FileCheck returns nil if the type is not FileControl
 func (c Control) FileCheck() *FileCheck {
 	if c.Type != FileControl {
 		return nil
@@ -35,6 +35,7 @@ func (c Control) FileCheck() *FileCheck {
 	return &fc
 }
 
+// CommandCheck returns nil if the type is not CommandControl
 func (c Control) CommandCheck() *CommandCheck {
 	if c.Type != CommandControl {
 		return nil
@@ -44,12 +45,14 @@ func (c Control) CommandCheck() *CommandCheck {
 	return &cc
 }
 
+// FileCheck contains the keys for a FileControl
 type FileCheck struct {
 	File  string `json:"file"`
 	Key   string `json:"key"`
 	Value string `json:"value"`
 }
 
+// CommandCheck contains the keys for a CommandControl
 type CommandCheck struct {
 	Command          string `json:"cmd"`
 	CommandCheckType string `json:"cmd_check_type"`
