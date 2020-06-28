@@ -3,7 +3,9 @@ package main
 import (
 	"bufio"
 	"io/ioutil"
+	"log"
 	"os"
+	"os/exec"
 	"strings"
 )
 
@@ -54,7 +56,17 @@ func fileControl(control FileCheck) bool {
 ////// COMMAND CHECKS //////
 
 func cmdControl(control CommandCheck) bool {
-	return true
+	switch control.CommandCheckType {
+	case "contains":
+		out, err := exec.Command(control.Command).Output()
+		if err != nil {
+			log.Fatal(err)
+		}
+		if strings.Contains(string(out), control.ToCheck) {
+			return true
+		}
+	}
+	return false
 }
 
 ////// MAIN SWITCHER //////

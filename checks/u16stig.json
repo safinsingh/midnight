@@ -24,5 +24,44 @@
         "toCheck": "0 updates are security updates."
       }
     }
+  },
+  {
+    "os": "Ubuntu",
+    "version": 16,
+    "description": "V-75393: Ubuntu vendor packaged system security patches and updates must be installed and up to date.",
+    "control": {
+      "type": "command",
+      "check": {
+        "cmd": "grep banner-message-enable /etc/dconf/db/local.d/*",
+        "cmdCheckType": "contains",
+        "toCheck": "banner-message-enable=true"
+      }
+    }
+  },
+  {
+    "os": "Ubuntu",
+    "version": 16,
+    "description": "V-75435: The Ubuntu operating system must display the Standard Mandatory DoD Notice and Consent Banner before access to the system.",
+    "control": {
+      "type": "command",
+      "check": {
+        "cmd": "cat /etc/issue",
+        "cmdCheckType": "contains",
+        "toCheck": "I've read & consent to terms in IS user agreem't."
+      }
+    }
+  },
+  {
+    "os": "Ubuntu",
+    "version": 16,
+    "description": "V-75437: The Ubuntu operating system must enable a user session lock until that user re-establishes access using established identification and authentication procedures.",
+    "control": {
+      "type": "command",
+      "check": {
+        "cmd": "gsettings get org.gnome.desktop.lock-enabled",
+        "cmdCheckType": "contains",
+        "toCheck": "true"
+      }
+    }
   }
 ]
