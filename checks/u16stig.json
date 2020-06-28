@@ -63,5 +63,17 @@
         "toCheck": "true"
       }
     }
+  },
+  {
+    "os": "Ubuntu",
+    "version": 16,
+    "description": "V-75439: All users must be able to directly initiate a session lock for all connection types.",
+    "control": {
+      "type": "package",
+      "check": {
+        "package": "vlock",
+        "installed": true
+      }
+    }
   }
 ]

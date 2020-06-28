@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"io/ioutil"
-	"log"
 	"os"
 	"os/exec"
 	"strings"
@@ -60,12 +59,28 @@ func cmdControl(control CommandCheck) bool {
 	case "contains":
 		out, err := exec.Command(control.Command).Output()
 		if err != nil {
-			log.Fatal(err)
+			panic(err)
 		}
 		if strings.Contains(string(out), control.ToCheck) {
 			return true
 		}
 	}
+	return false
+}
+
+////// PACKAGE CHECKS //////
+
+func pkgControl(control PackageCheck) bool {
+	out, err := exec.Command("dpkg -l").Output()
+	if err != nil {
+		panic(err)
+	}
+	if strings.Contains(string(out), control.Package) && control.Installed {
+		return true
+	} else if !strings.Contains(string(out), control.Package) && control.Installed {
+		return true
+	}
+
 	return false
 }
 
