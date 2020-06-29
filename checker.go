@@ -79,24 +79,22 @@ func cmdControl(control CommandCheck) (bool, string) {
 		return true, ""
 	}
 
-	return false, err.Error()
+	return false, ""
 }
 
 ////// PACKAGE CHECKS //////
 
 func pkgControl(control PackageCheck) (bool, string) {
-	out, err := exec.Command("dpkg -l").Output()
+	out, err := exec.Command("dpkg", "-l").Output()
 	if err != nil {
 		return false, err.Error()
 	}
 
 	if strings.Contains(string(out), control.Package) && control.Installed {
 		return true, ""
-	} else if !strings.Contains(string(out), control.Package) && control.Installed {
-		return true, ""
 	}
 
-	return false, err.Error()
+	return false, ""
 }
 
 ////// MAIN SWITCHER //////
@@ -107,6 +105,8 @@ func checkSwitch(control Def) (bool, string) {
 		return fileControl(*control.Control.FileCheck())
 	case "command":
 		return cmdControl(*control.Control.CommandCheck())
+	case "package":
+		return pkgControl(*control.Control.PackageCheck())
 	}
 
 	return false, "Check not defined"
@@ -126,11 +126,14 @@ func commence(controls []Def, mode string) {
 			}
 		} else {
 			failPrint(controls[i])
-			errs = append(errs, err)
+			toApp := controls[i].Description + " -> " + err
+			errs = append(errs, toApp)
 		}
 	}
 
 	yellow := color.New(color.FgYellow, color.Bold)
-	yellow.Printf("[-] Errors: %v", errs)
-
+	yellow.Println("[-] Errors:")
+	for i := 0; i < len(errs); i++ {
+		yellow.Println(errs[i])
+	}
 }

@@ -107,7 +107,7 @@
     "version": 16,
     "description": "V-75445: The Ubuntu operating system must prevent direct login into the root account.",
     "control": {
-      "type": "cmd",
+      "type": "command",
       "check": {
         "cmd": "cat /etc/shadow | grep 'root:' | cut -f2 -d ':'",
         "cmdCheckType": "contains",
@@ -120,7 +120,7 @@
     "version": 16,
     "description": "V-75449: The Ubuntu operating system must enforce password complexity by requiring that at least one upper-case character be used.",
     "control": {
-      "type": "cmd",
+      "type": "command",
       "check": {
         "cmd": "grep -i 'ucredit' /etc/security/pwquality.conf /etc/pwquality.conf.d/*.conf",
         "cmdCheckType": "contains",
@@ -133,7 +133,7 @@
     "version": 16,
     "description": "V-75451: The Ubuntu operating system must enforce password complexity by requiring that at least one lower-case character be used.",
     "control": {
-      "type": "cmd",
+      "type": "command",
       "check": {
         "cmd": "grep -i 'lcredit' /etc/security/pwquality.conf /etc/pwquality.conf.d/*.conf",
         "cmdCheckType": "contains",
@@ -146,7 +146,7 @@
     "version": 16,
     "description": "V-75453: The Ubuntu operating system must enforce password complexity by requiring that at least one numeric character be used.",
     "control": {
-      "type": "cmd",
+      "type": "command",
       "check": {
         "cmd": "grep -i 'dcredit' /etc/security/pwquality.conf /etc/pwquality.conf.d/*.conf",
         "cmdCheckType": "contains",
@@ -159,7 +159,7 @@
     "version": 16,
     "description": "V-75455: All passwords must contain at least one special character.",
     "control": {
-      "type": "cmd",
+      "type": "command",
       "check": {
         "cmd": "grep -i 'ocredit' /etc/security/pwquality.conf /etc/pwquality.conf.d/*.conf",
         "cmdCheckType": "contains",
@@ -172,7 +172,7 @@
     "version": 16,
     "description": "V-75457: The Ubuntu operating system must require the change of at least 8 characters when passwords are changed.",
     "control": {
-      "type": "cmd",
+      "type": "command",
       "check": {
         "cmd": "grep -i 'difok' /etc/security/pwquality.conf /etc/pwquality.conf.d/*.conf",
         "cmdCheckType": "contains",
