@@ -135,7 +135,7 @@ func commence(controls []Def, mode string) {
 	}
 
 	yellow := color.New(color.FgYellow, color.Bold)
-	yellow.Println("[-] Errors:")
+	yellow.Println("\n[-] Errors:")
 	for i := 0; i < len(errs); i++ {
 		yellow.Println(errs[i])
 	}
