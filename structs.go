@@ -66,8 +66,8 @@ type FileCheck struct {
 // CommandCheck contains the keys for a CommandControl
 type CommandCheck struct {
 	Command          string `json:"cmd"`
-	CommandCheckType string `json:"cmd_check_type"`
-	ToCheck          string `json:"to_check"`
+	CommandCheckType string `json:"cmdCheckType"`
+	ToCheck          string `json:"toCheck"`
 }
 
 // PackageCheck contains the keys for a PackageControl
