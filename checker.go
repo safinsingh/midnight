@@ -29,7 +29,9 @@ func keyInFile(key string, file string) (bool, string) {
 		}
 		return strings.Contains(string(f), key), ""
 	}
-	return false, "File does not exist"
+
+	errmsg := "File does not exist: " + file
+	return false, errmsg
 }
 
 func keyPairInFile(key string, val string, file string) (bool, string) {
@@ -52,7 +54,8 @@ func keyPairInFile(key string, val string, file string) (bool, string) {
 		}
 	}
 
-	return false, "File does not exist"
+	errmsg := "File does not exist: " + file
+	return false, errmsg
 }
 
 func fileControl(control FileCheck) (bool, string) {
@@ -70,7 +73,7 @@ func fileControl(control FileCheck) (bool, string) {
 ////// COMMAND CHECKS //////
 
 func cmdControl(control CommandCheck) (bool, string) {
-	out, err := exec.Command(strings.Fields(control.Command)[0], strings.Fields(control.Command)[1:]...).Output()
+	out, err := exec.Command("bash", "-c", control.Command).Output()
 	if err != nil {
 		return false, err.Error()
 	}

@@ -32,7 +32,7 @@
     "control": {
       "type": "command",
       "check": {
-        "cmd": "grep banner-message-enable /etc/dconf/db/local.d/*",
+        "cmd": "grep banner-message-enable /etc/dconf/db/local.d/* | cat",
         "cmdCheckType": "contains",
         "toCheck": "banner-message-enable=true"
       }
@@ -58,7 +58,7 @@
     "control": {
       "type": "command",
       "check": {
-        "cmd": "gsettings get org.gnome.desktop.lock-enabled",
+        "cmd": "gsettings get org.gnome.desktop.lock-enabled | cat",
         "cmdCheckType": "contains",
         "toCheck": "true"
       }
@@ -109,7 +109,7 @@
     "control": {
       "type": "command",
       "check": {
-        "cmd": "cat /etc/shadow | grep 'root:' | cut -f2 -d ':'",
+        "cmd": "cat /etc/shadow | grep 'root:' | cut -f2 -d ':' | cat",
         "cmdCheckType": "contains",
         "toCheck": "!*"
       }
@@ -122,7 +122,7 @@
     "control": {
       "type": "command",
       "check": {
-        "cmd": "grep -i 'ucredit' /etc/security/pwquality.conf /etc/pwquality.conf.d/*.conf",
+        "cmd": "grep -i 'ucredit' /etc/security/pwquality.conf /etc/pwquality.conf.d/*.conf | cat",
         "cmdCheckType": "contains",
         "toCheck": "ucredit=-1"
       }
@@ -135,7 +135,7 @@
     "control": {
       "type": "command",
       "check": {
-        "cmd": "grep -i 'lcredit' /etc/security/pwquality.conf /etc/pwquality.conf.d/*.conf",
+        "cmd": "grep -i 'lcredit' /etc/security/pwquality.conf /etc/pwquality.conf.d/*.conf | cat",
         "cmdCheckType": "contains",
         "toCheck": "lcredit=-1"
       }
@@ -148,7 +148,7 @@
     "control": {
       "type": "command",
       "check": {
-        "cmd": "grep -i 'dcredit' /etc/security/pwquality.conf /etc/pwquality.conf.d/*.conf",
+        "cmd": "grep -i 'dcredit' /etc/security/pwquality.conf /etc/pwquality.conf.d/*.conf | cat",
         "cmdCheckType": "contains",
         "toCheck": "dcredit=-1"
       }
@@ -161,7 +161,7 @@
     "control": {
       "type": "command",
       "check": {
-        "cmd": "grep -i 'ocredit' /etc/security/pwquality.conf /etc/pwquality.conf.d/*.conf",
+        "cmd": "grep -i 'ocredit' /etc/security/pwquality.conf /etc/pwquality.conf.d/*.conf | cat",
         "cmdCheckType": "contains",
         "toCheck": "ocredit=-1"
       }
@@ -174,7 +174,7 @@
     "control": {
       "type": "command",
       "check": {
-        "cmd": "grep -i 'difok' /etc/security/pwquality.conf /etc/pwquality.conf.d/*.conf",
+        "cmd": "grep -i 'difok' /etc/security/pwquality.conf /etc/pwquality.conf.d/*.conf | cat",
         "cmdCheckType": "contains",
         "toCheck": "difok=8"
       }
