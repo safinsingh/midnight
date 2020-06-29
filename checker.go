@@ -13,7 +13,7 @@ import (
 func keyInFile(key string, file string) bool {
 	f, err := ioutil.ReadFile(file)
 	if err != nil {
-		panic(err)
+		// panic(err)
 	}
 
 	return strings.Contains(string(f), key)
@@ -22,7 +22,7 @@ func keyInFile(key string, file string) bool {
 func keyPairInFile(key string, val string, file string) bool {
 	f, err := os.Open(file)
 	if err != nil {
-		panic(err)
+		// panic(err)
 	}
 	defer f.Close()
 
@@ -55,16 +55,14 @@ func fileControl(control FileCheck) bool {
 ////// COMMAND CHECKS //////
 
 func cmdControl(control CommandCheck) bool {
-	switch control.CommandCheckType {
-	case "contains":
-		out, err := exec.Command(control.Command).Output()
-		if err != nil {
-			panic(err)
-		}
-		if strings.Contains(string(out), control.ToCheck) {
-			return true
-		}
+	out, err := exec.Command(strings.Fields(control.Command)[0], strings.Fields(control.Command)[1:]...).Output()
+	if err != nil {
+		// fmt.Println(err)
 	}
+	if strings.Contains(string(out), control.ToCheck) {
+		return true
+	}
+
 	return false
 }
 

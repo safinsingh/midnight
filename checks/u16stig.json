@@ -28,7 +28,7 @@
   {
     "os": "Ubuntu",
     "version": 16,
-    "description": "V-75393: Ubuntu vendor packaged system security patches and updates must be installed and up to date.",
+    "description": "V-75393: The Ubuntu operating system must display the Standard Mandatory DoD Notice and Consent Banner before access to the system.",
     "control": {
       "type": "command",
       "check": {
@@ -183,13 +183,39 @@
   {
     "os": "Ubuntu",
     "version": 16,
-    "description": "V-75459:  The Ubuntu operating system must encrypt all stored passwords with a FIPS 140-2 approved cryptographic hashing algorithm.",
+    "description": "V-75459: The Ubuntu operating system must encrypt all stored passwords with a FIPS 140-2 approved cryptographic hashing algorithm.",
     "control": {
       "type": "file",
       "check": {
         "file": "/etc/login.defs",
         "key": "ENCRYPT_METHOD",
         "value": "SHA512"
+      }
+    }
+  },
+  {
+    "os": "Ubuntu",
+    "version": 16,
+    "description": "V-75463: The Ubuntu operating system must employ FIPS 140-2 approved cryptographic hashing algorithms for all created passwords.",
+    "control": {
+      "type": "file",
+      "check": {
+        "file": "/etc/pam.d/common-password",
+        "key": "rounds",
+        "value": "5000"
+      }
+    }
+  },
+  {
+    "os": "Ubuntu",
+    "version": 16,
+    "description": "V-75465: The pam_unix.so module must use a FIPS 140-2 approved cryptographic hashing algorithm for system authentication.",
+    "control": {
+      "type": "file",
+      "check": {
+        "file": "/etc/pam.d/common-password",
+        "key": "pam_unix.so",
+        "value": "sha512"
       }
     }
   }
