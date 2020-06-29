@@ -6,85 +6,102 @@ import (
 	"os"
 	"os/exec"
 	"strings"
+
+	"github.com/fatih/color"
 )
+
+////// ERROR HANDLERS //////
+
+func fileExists(file string) bool {
+	if _, err := os.Stat(file); os.IsNotExist(err) {
+		return false
+	}
+	return true
+}
 
 ////// FILE CONTROL FUNCTIONS //////
 
-func keyInFile(key string, file string) bool {
-	f, err := ioutil.ReadFile(file)
-	if err != nil {
-		// panic(err)
+func keyInFile(key string, file string) (bool, string) {
+	if fileExists(file) {
+		f, err := ioutil.ReadFile(file)
+		if err != nil {
+			panic("Internal file reading error, are you in root?")
+		}
+		return strings.Contains(string(f), key), ""
 	}
-
-	return strings.Contains(string(f), key)
+	return false, "File does not exist"
 }
 
-func keyPairInFile(key string, val string, file string) bool {
-	f, err := os.Open(file)
-	if err != nil {
-		// panic(err)
-	}
-	defer f.Close()
+func keyPairInFile(key string, val string, file string) (bool, string) {
+	if fileExists(file) {
+		f, err := os.Open(file)
+		if err != nil {
+			panic("Internal file reading error, are you in root?")
+		}
+		defer f.Close()
 
-	scanner := bufio.NewScanner(f)
-	for scanner.Scan() {
-		if strings.Contains(scanner.Text(), key) && strings.Contains(scanner.Text(), val) {
-			return true
+		scanner := bufio.NewScanner(f)
+		for scanner.Scan() {
+			if strings.Contains(scanner.Text(), key) && strings.Contains(scanner.Text(), val) {
+				return true, ""
+			}
+		}
+
+		if err := scanner.Err(); err != nil {
+			panic("Internal file scanner error, are you in root?")
 		}
 	}
 
-	if err := scanner.Err(); err != nil {
-		panic(err)
-	}
-
-	return false
+	return false, "File does not exist"
 }
 
-func fileControl(control FileCheck) bool {
-	if !keyInFile(control.Key, control.File) {
-		return false
+func fileControl(control FileCheck) (bool, string) {
+	condInit, errInit := keyInFile(control.Key, control.File)
+	if condInit {
+		cond, err := keyPairInFile(control.Key, control.Value, control.File)
+		if cond {
+			return true, ""
+		}
+		return false, err
 	}
-
-	if keyPairInFile(control.Key, control.Value, control.File) {
-		return true
-	}
-
-	return false
+	return false, errInit
 }
 
 ////// COMMAND CHECKS //////
 
-func cmdControl(control CommandCheck) bool {
+func cmdControl(control CommandCheck) (bool, string) {
 	out, err := exec.Command(strings.Fields(control.Command)[0], strings.Fields(control.Command)[1:]...).Output()
 	if err != nil {
-		// fmt.Println(err)
-	}
-	if strings.Contains(string(out), control.ToCheck) {
-		return true
+		return false, err.Error()
 	}
 
-	return false
+	if strings.Contains(string(out), control.ToCheck) {
+		return true, ""
+	}
+
+	return false, err.Error()
 }
 
 ////// PACKAGE CHECKS //////
 
-func pkgControl(control PackageCheck) bool {
+func pkgControl(control PackageCheck) (bool, string) {
 	out, err := exec.Command("dpkg -l").Output()
 	if err != nil {
-		panic(err)
-	}
-	if strings.Contains(string(out), control.Package) && control.Installed {
-		return true
-	} else if !strings.Contains(string(out), control.Package) && control.Installed {
-		return true
+		return false, err.Error()
 	}
 
-	return false
+	if strings.Contains(string(out), control.Package) && control.Installed {
+		return true, ""
+	} else if !strings.Contains(string(out), control.Package) && control.Installed {
+		return true, ""
+	}
+
+	return false, err.Error()
 }
 
 ////// MAIN SWITCHER //////
 
-func checkSwitch(control Def) bool {
+func checkSwitch(control Def) (bool, string) {
 	switch control.Control.Type {
 	case "file":
 		return fileControl(*control.Control.FileCheck())
@@ -92,17 +109,28 @@ func checkSwitch(control Def) bool {
 		return cmdControl(*control.Control.CommandCheck())
 	}
 
-	return false
+	return false, "Check not defined"
 }
 
 func commence(controls []Def, mode string) {
-	for i := 0; i < len(controls); i++ {
-		code := checkSwitch(controls[i])
+	var errs []string
 
-		if code {
-			successPrint(controls[i])
+	for i := 0; i < len(controls); i++ {
+		code, err := checkSwitch(controls[i])
+
+		if err == "" {
+			if code {
+				successPrint(controls[i])
+			} else {
+				failPrint(controls[i])
+			}
 		} else {
 			failPrint(controls[i])
+			errs = append(errs, err)
 		}
 	}
+
+	yellow := color.New(color.FgYellow, color.Bold)
+	yellow.Printf("[-] Errors: %v", errs)
+
 }
