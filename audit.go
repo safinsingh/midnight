@@ -115,7 +115,7 @@ func checkSwitch(control Def) (bool, string) {
 	return false, "Check not defined"
 }
 
-func commence(controls []Def, mode string) {
+func commence(controls []Def) {
 	var errs []string
 
 	for i := 0; i < len(controls); i++ {

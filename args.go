@@ -35,7 +35,7 @@ func banner(mode string, defs string) {
 }
 
 func argparse() (string, string) {
-	mode := flag.String("mode", "audit", "Audit current system for security vulnerabilities")
+	mode := flag.String("mode", "audit", "Mode to run midnight in. Possible modes: audit, enforce, docker")
 	file := flag.String("file", "", "Configuration file to use (mandatory)")
 
 	flag.Parse()
