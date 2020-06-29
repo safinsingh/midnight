@@ -95,7 +95,7 @@ func checkSwitch(control Def) bool {
 	return false
 }
 
-func commence(controls []Def) {
+func commence(controls []Def, mode string) {
 	for i := 0; i < len(controls); i++ {
 		code := checkSwitch(controls[i])
 

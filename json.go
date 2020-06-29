@@ -5,8 +5,8 @@ import (
 	"io/ioutil"
 )
 
-func jsonParse() []Def {
-	data, err := ioutil.ReadFile("checks/u16stig.json")
+func jsonParse(file string) []Def {
+	data, err := ioutil.ReadFile(file)
 	if err != nil {
 		panic(err)
 	}

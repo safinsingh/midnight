@@ -1,6 +1,7 @@
 package main
 
 func main() {
-	config := jsonParse()
-	commence(config)
+	mode, file := argparse()
+	defs := jsonParse(file)
+	commence(defs, mode)
 }

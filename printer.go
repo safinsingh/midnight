@@ -6,15 +6,9 @@ import (
 	"github.com/fatih/color"
 )
 
-func infoPrint(control Def) {
+func infoPrint(val string) {
 	cyan := color.New(color.FgCyan, color.Bold)
-
-	cyan.Printf("[!] ")
-	fmt.Printf("Check for OS: ")
-	cyan.Printf("%s %d", control.OS, control.Version)
-	fmt.Printf(" - ")
-	cyan.Printf(control.Description)
-	fmt.Printf("\n")
+	cyan.Printf("%s", val)
 }
 
 func successPrint(control Def) {
