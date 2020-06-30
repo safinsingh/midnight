@@ -14,8 +14,8 @@
   <img alt="Version" src="https://img.shields.io/badge/Version-1.0-red.svg" />
   <img alt="License: MIT" src="https://img.shields.io/badge/License-GPLv3-orange.svg" />
   <img alt="Made with Go" src="https://img.shields.io/badge/Made%20with-Go-yellow.svg" />
-  <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg">
-  <img alt="Maintained" src="https://img.shields.io/badge/Maintained-Yes-blue">
+  <img alt="A+" src="https://goreportcard.com/badge/github.com/safinsingh/midnight">
+  <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-Welcome-blue.svg">
   <img alt="awesome" src="https://img.shields.io/badge/Awesome-Yes-blueviolet">
 </p>
 
