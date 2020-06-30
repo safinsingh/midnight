@@ -38,8 +38,12 @@
 
 ```sh
 git clone https://github.com/safinsingh/midnight.git
+
 bash install.sh
+bash docker.sh # Optional, to install Docker
+
 go build .
+
 ./midnight -file checks/u16stig.json
 ```
 
