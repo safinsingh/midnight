@@ -26,7 +26,7 @@
 - System audit to report vulnerabilities
 - Based on STIGs and (in the future) CIS Controls
 - User can specify custom controls in JSON
-- Ability to run on virtual machines with Docker
+- Ability to run on virtual machines with Docker and Alpine Linux
 
 ## ✨ In Action
 
