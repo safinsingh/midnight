@@ -9,6 +9,6 @@ func handle(defs []Def, mode string) {
 	case "enforce":
 		fmt.Println("Not yet supported")
 	case "docker":
-		dockerGen(defs)
+		dockerGen()
 	}
 }
