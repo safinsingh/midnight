@@ -17,6 +17,8 @@
   <img alt="A+" src="https://goreportcard.com/badge/github.com/safinsingh/midnight">
   <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-Welcome-blue.svg">
   <img alt="awesome" src="https://img.shields.io/badge/Awesome-Yes-blueviolet">
+  <br>
+  <img alt="gh-actions" src="https://github.com/safinsingh/midnight/workflows/Go/badge.svg" />
 </p>
 
 <hr>
